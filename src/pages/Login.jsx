@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import axios from "../api/Axios";
 import OtpModal from "../components/OtpCheck";
 import { useState } from "react";
-import { BsFillTrash3Fill } from "react-icons/bs";
+import { useEffect } from "react";
 
 
 
@@ -12,7 +12,16 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 const Login = () => {
 
  const navigate = useNavigate()
- const [open, setOpen] = useState(false)
+ const [open, setOpen] = useState(false); // State to control modal visibility
+
+
+
+const handleCloseModal = () => {
+  setOpen(false);
+};
+
+
+
 
  //-------------- login function -----------------
 
@@ -32,6 +41,7 @@ const Login = () => {
       // navigate("/home");  
     }
   } catch (error) {
+    setOpen(true);
     console.log(error)
     swal("Error!", "Something went wrong", "error");
   }
@@ -101,26 +111,15 @@ const Login = () => {
          
         </div>
       </div>
-      <OtpModal open={open} onClose={() => setOpen(false)}>
-        <div className="text-center w-56">
-          <BsFillTrash3Fill  size={56} className="mx-auto text-red-500" />
-          <div className="mx-auto my-4 w-48">
-            <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
-            <p className="text-sm text-gray-500">
-              Are you sure you want to delete this item?
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <button className="btn btn-danger w-full">Delete</button>
-            <button
-              className="btn btn-light w-full"
-              onClick={() => setOpen(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
+      <div>
+    
+    {open && (
+      <OtpModal open={open} onClose={handleCloseModal}>
+        {/* Optional content to display inside the modal */}
+        <h3 className="text-lg font-black text-gray-800 text-center">Verify OTP</h3>
       </OtpModal>
+    )}
+  </div>
     </div>
    </>
     
