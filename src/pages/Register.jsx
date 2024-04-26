@@ -1,7 +1,8 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import swal from "sweetalert";
-import axios from "../api/Axios";
+// import axios from "../api/Axios";
+import axios from "axios";
 
 
 
@@ -12,19 +13,20 @@ const Register = () => {
 
  //-------------- login function -----------------
 
- const handleLogin = async (e) => {
+ const handleRegister = async (e) => {
   e.preventDefault();
   const userData = {
     userName : e.target.username.value.toUpperCase(),
     email: e.target.email.value,
     password: e.target.password.value,
   };
+ 
   try {
-    const response = await axios.post("/api/user/register", userData);
+    const response = await axios.post("http://localhost:3000/api/user/register", userData);
     
     if (response.status === 200) {
-      localStorage.setItem('token', response.data.token);
-      await swal("Success!", "User logged in successfully", "success");
+      // localStorage.setItem('token', response.data.token);
+      await swal("Success!", response.data.message, "success");
       navigate("/login");  
     }
   } catch (error) {
@@ -48,7 +50,7 @@ const Register = () => {
           <span className="font-light text-gray-400 mb-8">
           Create your account and start exploring today!
           </span>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleRegister}>
          
           <div className="py-4">
             <span className="mb-2 text-md">Username</span>

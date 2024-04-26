@@ -1,7 +1,8 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import swal from "sweetalert";
-import axios from "../api/Axios";
+// import axios from "../api/Axios";
+import axios from "axios";
 import OtpModal from "../components/OtpCheck";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -31,17 +32,19 @@ const handleCloseModal = () => {
     email: e.target.email.value,
     password: e.target.password.value,
   };
+  
   try {
-    const response = await axios.post("/api/user/login", userData);
+    const response = await axios.post("http://localhost:3000/api/user/login", userData);
 
     if (response.status === 200) {
-      localStorage.setItem('token', response.data.token);
-      await swal("Success!", "User logged in successfully", "success");
+   
+      await swal("Success!", response.data.message, "success");
+      localStorage.setItem("userId",response.data.data)
       setOpen(true);
       // navigate("/home");  
     }
   } catch (error) {
-    setOpen(true);
+   
     console.log(error)
     swal("Error!", "Something went wrong", "error");
   }
@@ -117,6 +120,7 @@ const handleCloseModal = () => {
       <OtpModal open={open} onClose={handleCloseModal}>
         {/* Optional content to display inside the modal */}
         <h3 className="text-lg font-black text-gray-800 text-center">Verify OTP</h3>
+       
       </OtpModal>
     )}
   </div>
