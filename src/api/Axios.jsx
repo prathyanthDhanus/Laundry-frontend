@@ -17,21 +17,21 @@ const Axios = axios.create({
 Axios.interceptors.request.use((request) => {
   const path = window.location.href;
   const token = localStorage.getItem("token");
-  console.log("token",token)
+  // console.log("token",token)
   request.headers.Authorization = `Bearer ${token}`;
   const decodedToken = jwtDecode(token);
-  console.log("decodedtoken",decodedToken);
+  // console.log("decodedtoken",decodedToken);
   const isExpired = dayjs.unix(decodedToken?.exp).diff(dayjs()) < 1;
 
   if (isExpired && request?.url !== `http://localhost:3000/api/auth/refresh-token/user`) {
     const accessToken = async () => {
       try {
         const response = await Axios.post(`http://localhost:3000/api/auth/refresh-token/user`);
-        console.log("refreshresponse",response)
+        // console.log("refreshresponse",response)
         localStorage.setItem("token", response?.data?.data);
         window.location.href = path;
       } catch (error) {
-        console.log("refresherror",error);
+        // console.log("refresherror",error);
         if (error?.response?.status === 422) {
           localStorage.removeItem("token");
           window.location.href = path;

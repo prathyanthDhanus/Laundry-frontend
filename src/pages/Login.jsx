@@ -38,7 +38,7 @@ const handleCloseModal = () => {
 
     if (response.status === 200) {
    
-      await swal("Success!", response.data.message, "success");
+      await swal("Success!", response?.data?.message, "success");
       localStorage.setItem("userId",response.data.data)
       setOpen(true);
       // navigate("/home");  

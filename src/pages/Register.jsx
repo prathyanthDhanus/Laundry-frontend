@@ -24,14 +24,14 @@ const Register = () => {
   try {
     const response = await axios.post("http://localhost:3000/api/user/register", userData);
     
-    if (response.status === 200) {
+    if (response?.status === 200) {
       // localStorage.setItem('token', response.data.token);
-      await swal("Success!", response.data.message, "success");
+      await swal("Success!", response?.data?.message, "success");
       navigate("/login");  
     }
   } catch (error) {
-    console.log(error)
-    swal("Error!", error.response.data.message, "error");
+    
+    swal("Error!", error?.response?.data?.message, "error");
   }
 };
 

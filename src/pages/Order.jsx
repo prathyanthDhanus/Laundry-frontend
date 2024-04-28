@@ -7,48 +7,52 @@ import { useNavigate } from "react-router-dom";
 const Order = () => {
 
   //============== hooks ==================
+
   const navigate = useNavigate()
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [quantities, setQuantities] = useState(() => {
     return Array(subCategories.length).fill(0);
-  }); // Initialize as an empty array
+  });
+  const [totals, setTotals] = useState(() => {
+    return Array(subCategories.length).fill(0);
+  }); // Initialize as an empty array for totals
 
   //================== quantity ======================
   
-  const increaseQuantity = (index) => {
+   const increaseQuantity = (index) => {
     const newQuantities = [...quantities];
-    newQuantities[index] = Math.max(0, newQuantities[index] + 1); // Ensure quantity doesn't go below 0
+    newQuantities[index] = Math.max(0, newQuantities[index] + 1);
     setQuantities(newQuantities);
     
     // Update local storage
-    const subCategoryId = subCategories[index]._id;
-    const updatedData = {
-      ...JSON.parse(localStorage.getItem("orderData")),
-      [subCategoryId]: { quantity: newQuantities[index], name: subCategories[index].subCategoryName  }
-    };
-    localStorage.setItem("orderData", JSON.stringify(updatedData));
+    updateLocalStorage(index, newQuantities[index]);
   };
 
   const decreaseQuantity = (index) => {
     const newQuantities = [...quantities];
-    newQuantities[index] = Math.max(0, newQuantities[index] - 1); // Ensure quantity doesn't go below 0
+    newQuantities[index] = Math.max(0, newQuantities[index] - 1);
     setQuantities(newQuantities);
     
     // Update local storage
+    updateLocalStorage(index, newQuantities[index]);
+  };
+
+  const updateLocalStorage = (index, quantity) => {
     const subCategoryId = subCategories[index]._id;
+    const subCategoryName = subCategories[index].subCategoryName;
+    const total = subCategories[index].serviceCharge * quantity;
+    const orderData = JSON.parse(localStorage.getItem("orderData")) || {}; // Parse existing order data or initialize as an empty object
     const updatedData = {
-      ...JSON.parse(localStorage.getItem("orderData")),
-      [subCategoryId]: { quantity: newQuantities[index], name: subCategories[index].subCategoryName }
+      ...orderData,
+      [subCategoryId]: { subCategoryId: subCategoryId, quantity: quantity, total: total ,name:subCategoryName }
     };
     localStorage.setItem("orderData", JSON.stringify(updatedData));
   };
 
-  useEffect(() => {
-    setQuantities(Array(subCategories.length).fill(0));
-  }, [subCategories]);
 
   //============== fetching categories =================
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,9 +60,15 @@ const Order = () => {
         if (response.status === 200) {
           const data = response.data.data;
           setCategories(data);
+          const updatedQuantities = Array(data.length).fill(0);
+          setQuantities(updatedQuantities);
+          const updatedTotals = Array(data.length).fill(0);
+          setTotals(updatedTotals);
+
         }
       } catch (error) {
-        swal("Error!", "Something went wrong", "error");
+        // swal("Error!", "Something went wrong", "error");
+        console.log(error)
       }
     };
     fetchData();
@@ -66,7 +76,6 @@ const Order = () => {
 
   //================== fetching sub-categories ================
   const handleCategorySelect = (categoryId) => {
-    // Send the selected categoryId to the backend
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/user/sub-category/user", {
@@ -75,7 +84,7 @@ const Order = () => {
           },
         });
         if(response.status===200){
-            const data = response.data.data;
+            const data = response?.data?.data;
             setSubCategories(data);
         }
       } catch (error) {
@@ -94,6 +103,23 @@ const Order = () => {
     }
   }, [subCategories]);
 
+  // useEffect(() => {
+  //   const updatedTotals = quantities.map((quantity, index) => {
+  //     return quantity * subCategories[index].serviceCharge;
+  //   });
+  //   setTotals(updatedTotals);
+  // }, [quantities]);
+  useEffect(() => {
+    const updatedTotals = quantities.map((quantity, index) => {
+      // Check if subCategories[index] exists before accessing its properties
+      if (subCategories[index]) {
+        return quantity * subCategories[index].serviceCharge;
+      } else {
+        return 0; // or any default value you prefer
+      }
+    });
+    setTotals(updatedTotals);
+  }, [quantities, subCategories]);
   return (
     <>
       <div className="container mx-auto p-4 grid justify-center items-center">
@@ -144,7 +170,7 @@ const Order = () => {
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                   <p className="text-sm leading-6 text-gray-900">Total</p>
-                  <p className="mt-1 text-xs leading-5 text-gray-500">₹{item.serviceCharge * quantities[index]}</p>
+                  <p className="mt-1 text-xs leading-5 text-gray-500">₹{totals[index]}</p>
                 </div>
               </li>
             </ul>
@@ -165,3 +191,4 @@ const Order = () => {
 };
 
 export default Order;
+``

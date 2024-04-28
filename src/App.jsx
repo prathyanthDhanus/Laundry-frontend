@@ -8,7 +8,8 @@ import Order from "./pages/Order";
 
 import PrivateRoute from "./utils/PrivateRoutes";
 import ConfirmOrder from "./pages/ConfirmOrder";
-
+import GetOrders from "./pages/GetOrders";
+import CancelOrder from "./pages/CancelOrder";
 
 
 
@@ -33,6 +34,8 @@ function App() {
 
    <Route path="/place-orders" element={<PrivateRoute><Order/></PrivateRoute>} /> 
    <Route path="/confirm-orders" element={<PrivateRoute><ConfirmOrder/></PrivateRoute>} /> 
+   <Route path="/orders" element={<PrivateRoute><GetOrders/></PrivateRoute>} /> 
+   <Route path="/cancel/orders/:id" element={<PrivateRoute><CancelOrder/></PrivateRoute>} /> 
    </Routes>
   </myContext.Provider>
     </>
