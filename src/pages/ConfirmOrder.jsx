@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 
 const ConfirmOrder = () => {
+
+  //============ hooks ===============
+  
   const [userProfile, setUserProfile] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const navigate = useNavigate();
@@ -36,12 +39,14 @@ const ConfirmOrder = () => {
     }
   }, []);
 
+  //================== save order ===================
+
   const handleOrder = async () => {
     try {
       const selectedAddress = document.querySelector(
         'input[name="address"]:checked'
       ).value;
-      console.log(selectedAddress)
+     
       // Prepare the payload to send to the backend
       const payload = {
         orderData: orderData,
@@ -80,7 +85,8 @@ const ConfirmOrder = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="border border-blue-500 px-4 py-2">Category</th>
+                <th className="border border-blue-500 px-4 py-2">Cloths </th>
+                <th className="border border-blue-500 px-4 py-2">Selected for</th>
                 <th className="border border-blue-500 px-4 py-2">Quantity</th>
                 <th className="border border-blue-500 px-4 py-2">Total</th>
               </tr>
@@ -90,6 +96,9 @@ const ConfirmOrder = () => {
                 <tr key={item._id} className="border border-blue-500">
                   <td className="border border-blue-500 px-4 py-2">
                     {item.name}
+                  </td>
+                  <td className="border border-blue-500 px-4 py-2">
+                    {item.categoryName}
                   </td>
                   <td className="border border-blue-500 px-4 py-2">
                     {item.quantity}
