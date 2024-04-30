@@ -16,17 +16,22 @@ const GetOrders = () => {
     // Function to fetch orders from backend
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(
-          `/api/user/orders?page=${currentPage}`
-        );
+        // const response = await axios.get(
+        //   `/api/user/orders?page=${currentPage}`
+        // );
 
-        // Check the structure of the response data
-        const { data, totalPages } = response.data;
+        // // Check the structure of the response data
+        // const { data, totalPages } = response.data;
 
-        setOrders(data); // Set orders data
-        setTotalPages(totalPages); // Update totalPages state
+        // setOrders(data); // Set orders data
+        // setTotalPages(totalPages); // Update totalPages state
+
+        const response = await axios.get('/api/user/user-orders');
+        const data = response.data.data;
+        setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
+        navigate('*')
       }
     };
 

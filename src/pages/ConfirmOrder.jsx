@@ -112,13 +112,13 @@ const ConfirmOrder = () => {
           </table>
         </div>
         <div className="text-xl  text-blue-500 flex items-center justify-center mt-5 ">
-          <div
+          {/* <div
             className="flex cursor-pointer pr-20 "
             onClick={() => navigate("/confirm-orders")}
           >
             <p className="mr-2 ">Next</p>
             <GrLinkNext className="mt-1" />
-          </div>
+          </div> */}
           <div
             className="flex cursor-pointer  "
             onClick={() => navigate("/place-orders")}
