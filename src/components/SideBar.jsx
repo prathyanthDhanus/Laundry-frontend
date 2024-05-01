@@ -222,7 +222,7 @@ function SidebarWithSearch() {
             <ul className="list-none p-0">
               <li>
                 <a
-                  href="#"
+                  href="/admin/category"
                   className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 >
                   <svg

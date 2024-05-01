@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import axios from "../adminApi/adminApi";
-
+// import axios from "../adminApi/adminApi";
+import axios from "axios";
 
 
 const AdminRegister = () => {
@@ -16,16 +16,20 @@ const AdminRegister = () => {
     const adminData = {
       userName: e.target.username.value,
       password: e.target.password.value,
+      adminKeyId:e.target.adminKeyId.value
     };
     try {
-      const response = await axios.post("/api/admin/register", adminData);
+      const response = await axios.post("http://localhost:3000/api/admin/register", adminData);
       console.log(response);
       if (response.status === 200) {
         await swal("Success!", response?.data?.message, "success");
         navigate("/admin/login");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      // swal("Error!", "Unauthorized entry", "error");
+      swal("Error!", error?.response?.data?.
+      error_message, "error");
     }
   };
 
@@ -67,10 +71,24 @@ const AdminRegister = () => {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
+                autoComplete="off"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+              />
+            </div>
+            <div>
+              <label htmlFor="adminKeyId" className="sr-only">
+                Admin Key Id
+              </label>
+              <input
+                id="adminKeyId"
+                name="adminKeyId"
+                type="password"
+                autoComplete="off"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder=" Admin Key Id"
               />
             </div>
           </div>

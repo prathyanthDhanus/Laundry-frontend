@@ -31,7 +31,7 @@ const GetOrders = () => {
         setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
-        navigate('*')
+        // navigate('*')
       }
     };
 

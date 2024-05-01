@@ -68,7 +68,7 @@ const ConfirmOrder = () => {
         await swal("Success!", response?.data?.message, "success");
         navigate('/')
       }
-      // console.log(response);
+     
     } catch (error) {
       console.log(error)
       // swal("Error!", error.response.data.message, "error");

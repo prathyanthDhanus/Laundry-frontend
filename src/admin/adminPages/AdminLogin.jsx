@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import axios from "../adminApi/adminApi";
+// import axios from "../adminApi/adminApi";
+import axios from "axios";
 
 const AdminLogin = () => {
+
+   const navigate = useNavigate();
+ 
   //================== login function ==============
 
   const handleSubmit = async (e) => {
@@ -11,16 +15,19 @@ const AdminLogin = () => {
     const adminData = {
       userName: e.target.username.value,
       password: e.target.password.value,
-      adminId: "66213be69fd180f2b09cc9e7",
+    
     };
     try {
-      const response = await axios.post("/api/admin/login", adminData);
-      console.log(response);
+      const response = await axios.post("http://localhost:3000/api/admin/login", adminData);
+      
       if (response.status === 200) {
+        
+        localStorage.setItem("token",response.data.data)
         await swal("Success!", response?.data?.message, "success");
       }
     } catch (error) {
       console.log(error);
+      await swal("Failure",error.response.data.message,"error")
     }
   };
 
@@ -86,6 +93,14 @@ const AdminLogin = () => {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
+             
+              Sign in 🔑 
+            </button>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-200 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-5"
+              onClick={()=>navigate('/admin/register')}
+            >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
                   className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
@@ -101,7 +116,7 @@ const AdminLogin = () => {
                   />
                 </svg>
               </span>
-              Sign in
+              Sign up 🔒
             </button>
           </div>
         </form>

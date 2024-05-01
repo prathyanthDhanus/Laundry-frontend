@@ -16,7 +16,7 @@ const Axios = axios.create({
 Axios.interceptors.request.use((request) => {
   const path = window.location.href;
   const token = localStorage.getItem("token");
-  // console.log("token",token)
+  console.log("token",token)
   request.headers.Authorization = `Bearer ${token}`;
   const decodedToken = jwtDecode(token);
   // console.log("decodedtoken",decodedToken);

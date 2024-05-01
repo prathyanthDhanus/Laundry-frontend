@@ -67,7 +67,6 @@ export default function OtpModal({ open, onClose, children }) {
     try {
        
       const response = await axios.post("http://localhost:3000/api/user/login/verify-otp", data);
-      console.log(response.data);
       if(response.status===200){
        localStorage.removeItem("userId")
        localStorage.setItem("token",response.data.data)
