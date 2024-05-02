@@ -22,7 +22,7 @@ import NotFound from "./components/NotFound";
 import Admin_Category from "./admin/adminPages/Admin_Category";
 import Admin_Subcategories from "./admin/adminPages/Admin_Subcategories";
 import SidebarWithSearch from "./components/SideBar";
-
+import { Outlet } from "react-router-dom";
 
 
 function App() {
@@ -60,10 +60,15 @@ function App() {
 
    {/*================== admin routes protected with token ============ */}
    
-   <Route path="/admin/home" element={<AdminPrivateRoute><AdminHome/></AdminPrivateRoute>} /> 
+   {/* <Route path="/admin/home" element={<AdminPrivateRoute><AdminHome/></AdminPrivateRoute>} /> 
    <Route path="/admin/category" element={<AdminPrivateRoute><Admin_Category/></AdminPrivateRoute>} /> 
    <Route path="/admin/sub-category" element={<AdminPrivateRoute><Admin_Subcategories/></AdminPrivateRoute>} /> 
-   
+    */}
+   <Route path="/sidebar" element={<SidebarWithSearch/>}/>
+   <Route element={<SidebarWithSearch/>}>
+   <Route path="/admin/category" element={<AdminPrivateRoute><Admin_Category/></AdminPrivateRoute>}/>
+   <Route path="/admin/sub-category" element={<AdminPrivateRoute><Admin_Subcategories/></AdminPrivateRoute>}/>
+      </Route>
 
 
 

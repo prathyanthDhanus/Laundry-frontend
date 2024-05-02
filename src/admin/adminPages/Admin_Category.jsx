@@ -35,9 +35,15 @@ const Admin_Category = () => {
 
   const handleSubmit = async () => {
     try {
+      // const updatedCategoriesArray = Object.entries(updatedCategories).map(
+      //   ([name]) => ({
+      //     categoryName: name,
+      //   })
+      // );
       const updatedCategoriesArray = Object.entries(updatedCategories).map(
-        ([name]) => ({
-          categoryName: name,
+        ([categoryId, categoryName]) => ({
+          categoryId: categoryId,
+          categoryName: categoryName,
         })
       );
 
@@ -151,7 +157,7 @@ const Admin_Category = () => {
             ))}
           </tbody>
         </table>
-        <div className="md:w-2/3 flex justify-end p-3 pr-20  ">
+        <div className="md:w-2/3 flex justify-end p-3 pr-20 sm:pl-20 ">
           <button
             className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline-purple focus:outline-none text-white font-bold py-2 px-4 rounded align-center "
             onClick={handleSubmit}
