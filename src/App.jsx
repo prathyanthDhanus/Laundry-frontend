@@ -22,7 +22,12 @@ import NotFound from "./components/NotFound";
 import Admin_Category from "./admin/adminPages/Admin_Category";
 import Admin_Subcategories from "./admin/adminPages/Admin_Subcategories";
 import SidebarWithSearch from "./components/SideBar";
-import { Outlet } from "react-router-dom";
+
+import DeliveryAgentProfile from "./deliveryAgent/deliveryAgentPages/deliveryAgentProfile";
+import ViewDeliveryAgent from "./deliveryAgent/deliveryAgentPages/ViewDeliveryAgent";
+import DeliveryAgentLogin from "./deliveryAgent/deliveryAgentPages/DeliveryAgentLogin";
+
+
 
 
 function App() {
@@ -47,6 +52,7 @@ function App() {
    <Route path="/admin/login" element={<AdminLogin/>}/>
    <Route path="/admin/register" element={<AdminRegister/>}/>
    <Route path="/unauthorized" element={<Unauthorized/>}/>
+   <Route path="/delivery-agent/login" element={<DeliveryAgentLogin/>}/>
    {/* <Route path="/not-found" element={<NotFound/>}/> */}
    <Route path="*" element={<NotFound/>}/>
 
@@ -68,6 +74,8 @@ function App() {
    <Route element={<SidebarWithSearch/>}>
    <Route path="/admin/category" element={<AdminPrivateRoute><Admin_Category/></AdminPrivateRoute>}/>
    <Route path="/admin/sub-category" element={<AdminPrivateRoute><Admin_Subcategories/></AdminPrivateRoute>}/>
+   <Route path="/admin/delivery-agent/profile" element={<AdminPrivateRoute><DeliveryAgentProfile/></AdminPrivateRoute>}/>
+   <Route path="/admin/view/delivery-agent/profile" element={<AdminPrivateRoute><ViewDeliveryAgent/></AdminPrivateRoute>}/>
       </Route>
 
 

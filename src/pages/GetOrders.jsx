@@ -57,7 +57,7 @@ const GetOrders = () => {
       console.error(`Error fetching ${filter} orders:`, error);
     }
   };
-  console.log(orders);
+ 
 
   return (
     <div className="mt-5 p-8 ">

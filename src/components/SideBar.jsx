@@ -176,7 +176,7 @@ function SidebarWithSearch() {
             <ul className="list-none p-0">
               <li>
                 <a
-                  href="#"
+                  href="/admin/delivery-agent/profile"
                   className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 >
                   <svg
@@ -193,12 +193,12 @@ function SidebarWithSearch() {
                       d="M16 15v-1a4 4 0 00-4-4H8M18 15a4 4 0 01-4 4v1"
                     />
                   </svg>
-                  Team 1
+                  Create delivery agent
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/admin/view/delivery-agent/profile"
                   className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 >
                   <svg
@@ -215,7 +215,7 @@ function SidebarWithSearch() {
                       d="M16 15v-1a4 4 0 00-4-4H8M18 15a4 4 0 01-4 4v1"
                     />
                   </svg>
-                  Team 2
+                 View all delivery agents
                 </a>
               </li>
             </ul>

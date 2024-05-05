@@ -10,7 +10,7 @@ const Admin_Subcategories = () => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [updatedCategories, setUpdatedCategories] = useState({});
-  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
+  // const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   //================== fetching categories =================
@@ -140,7 +140,7 @@ const Admin_Subcategories = () => {
       const willDelete = await swal("Are you sure?", "You want to delete this", "warning");
       if(willDelete){
 
-        const response = await axios.delete(`/api/admin//sub-category?subCategoryId=${subCategoryId}`);
+        const response = await axios.delete(`/api/admin/sub-category?subCategoryId=${subCategoryId}`);
         if(response.status===200){
           await swal("Success!", response?.data?.message, "success");
           window.location.reload()
@@ -223,7 +223,7 @@ const Admin_Subcategories = () => {
                     value={item.subCategoryName}
                     onChange={(e) => {
                       handleCategoryNameChange(e, item._id);
-                      setSelectedSubCategoryId(item._id);
+                      // setSelectedSubCategoryId(item._id);
                     }}
                   />
                 </td>

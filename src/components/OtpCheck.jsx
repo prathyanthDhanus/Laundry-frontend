@@ -10,7 +10,7 @@ export default function OtpModal({ open, onClose, children }) {
 
   const [otp, setOtp] = useState(""); // State to store the OTP digits
   const [showImage, setShowImage] = useState(false);
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId") ;
 
   const otp1Ref = useRef(null);
   const otp2Ref = useRef(null);
@@ -63,7 +63,7 @@ export default function OtpModal({ open, onClose, children }) {
       userId :userId,
       otp : otp
     }
-    console.log(data)
+   
     try {
        
       const response = await axios.post("http://localhost:3000/api/user/login/verify-otp", data);

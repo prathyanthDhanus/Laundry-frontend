@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../adminApi/adminApi";
 import swal from "sweetalert";
+import { MdDelete } from "react-icons/md";
 
 const Admin_Category = () => {
-
-//========================= hooks =========================
+  //========================= hooks =========================
 
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
@@ -101,6 +101,29 @@ const Admin_Category = () => {
     fetchData();
   }, []);
 
+  //==================== delete category ====================
+
+  const handleDelete = async (categoryId) => {
+    try {
+      const willDelete = await swal(
+        "Are you sure?",
+        "You want to delete this",
+        "warning"
+      );
+      if (willDelete) {
+        const response = await axios.patch(
+          `/api/admin/category?categoryId=${categoryId}`
+        );
+        if (response.status === 200) {
+          await swal("Success!", response?.data?.message, "success");
+          window.location.reload();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <h1 className="text-2xl font-bold mb-6">Create Category</h1>
@@ -153,6 +176,10 @@ const Admin_Category = () => {
                     }}
                   />
                 </td>
+                <MdDelete
+                  className="mt-7 m-3 text-2xl cursor-pointer hover:text-red-500 "
+                  onClick={() => handleDelete(item._id)}
+                />
               </tr>
             ))}
           </tbody>
