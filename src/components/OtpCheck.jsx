@@ -6,11 +6,11 @@ import { useRef } from "react";
 import axios from "axios";
 
 
-export default function OtpModal({ open, onClose, children }) {
+export default function OtpModal({ open, onClose, children ,endpoint}) {
 
   const [otp, setOtp] = useState(""); // State to store the OTP digits
   const [showImage, setShowImage] = useState(false);
-  const userId = localStorage.getItem("userId") ;
+  const userId = localStorage.getItem("userId") || localStorage.getItem("deliveryAgentId") ;
 
   const otp1Ref = useRef(null);
   const otp2Ref = useRef(null);
@@ -42,8 +42,12 @@ export default function OtpModal({ open, onClose, children }) {
 //----------------------- verify otp ---------------------
 
  const handleOtpVerify = async()=>{
+    const otpData = {
+      otp:otp
+    }
    try{
-    const response = await axios.post("/api/user/verify-otp",otp)
+    // const response = await axios.post("/api/user/verify-otp",otp);
+    const response = await axios.post(`http://localhost:3000${endpoint}`,otpData)
      if(response.status===200){
       localStorage.setItem("token",response.data.data)
       await swal("Success!", response.data.message, "success");
@@ -63,12 +67,13 @@ export default function OtpModal({ open, onClose, children }) {
       userId :userId,
       otp : otp
     }
-   
+     console.log(data)
     try {
        
-      const response = await axios.post("http://localhost:3000/api/user/login/verify-otp", data);
+      // const response = await axios.post("http://localhost:3000/api/user/login/verify-otp", data);
+      const response = await axios.post(`http://localhost:3000${endpoint}`, data);
       if(response.status===200){
-       localStorage.removeItem("userId")
+       localStorage.removeItem("userId") || localStorage.removeItem("deliveryAgentId");
        localStorage.setItem("token",response.data.data)
       await swal("Success!", response.data.message, "success");
       

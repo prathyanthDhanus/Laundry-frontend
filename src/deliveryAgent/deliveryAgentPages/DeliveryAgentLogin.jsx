@@ -22,20 +22,22 @@ const DeliveryAgentLogin = () => {
     const deliveryAgentData = {
         deliveryAgentMail:email
     }
+    console.log(deliveryAgentData)
    try{
-     const response = await axios.post("/api/delivery-agent/login",deliveryAgentData);
+     const response = await axios.post("http://localhost:3000/api/delivery-agent/login",deliveryAgentData);
      if(response.status===200){
         await swal("Success!", response?.data?.message, "success");
+        localStorage.setItem("deliveryAgentId",response?.data?.data);
         setOpen(true)
      }
    }catch(error){
-    swal("Error!", error?.response?.data?.message, "error");
+    swal("Error!", error?.response?.data?.error_message, "error");
    }
   };
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-cyan-400 via-cyan-600 to-indigo-700 p-3">
+    <div className="flex items-center justify-center min-h-screen  bg-gradient-to-r from-cyan-400 via-cyan-600 to-indigo-700 p-3 ">
     <div className="px-8 py-6 mx-4 mt-4 border w-96 shadow-md rounded-md bg-gray-200 ">
       <h3 className="text-2xl font-bold text-center">Delivery Agent Login</h3>
       <img src='https://res.cloudinary.com/due7btgno/image/upload/v1712915969/dwajaon9naso4n3v0hbs.jpg' alt='delivery agent'/>
@@ -65,10 +67,10 @@ const DeliveryAgentLogin = () => {
     <div>
     
     {open && (
-      <OtpModal open={open} onClose={handleCloseModal}>
+      <OtpModal open={open} onClose={handleCloseModal} endpoint="/api/delivery-agent/verify-otp" >
         {/* Optional content to display inside the modal */}
         <h3 className="text-lg font-black text-gray-800 text-center">Verify OTP</h3>
-       
+         
       </OtpModal>
     )}
   </div>

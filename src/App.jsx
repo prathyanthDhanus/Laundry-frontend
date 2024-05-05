@@ -1,5 +1,6 @@
 
 import {Routes,Route} from "react-router-dom";
+import { useState } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import HomePage from "./pages/HomePage";
@@ -26,15 +27,17 @@ import SidebarWithSearch from "./components/SideBar";
 import DeliveryAgentProfile from "./deliveryAgent/deliveryAgentPages/deliveryAgentProfile";
 import ViewDeliveryAgent from "./deliveryAgent/deliveryAgentPages/ViewDeliveryAgent";
 import DeliveryAgentLogin from "./deliveryAgent/deliveryAgentPages/DeliveryAgentLogin";
+import EditDeliveryAgent from "./deliveryAgent/deliveryAgentPages/EditDeliveryAgent";
 
 
 
 
 function App() {
 
+  const [deliveryAgents, setDeliveryAgents] = useState([]);
 
   const contextValue = {
-    
+    deliveryAgents,setDeliveryAgents
   }
   
 
@@ -70,12 +73,13 @@ function App() {
    <Route path="/admin/category" element={<AdminPrivateRoute><Admin_Category/></AdminPrivateRoute>} /> 
    <Route path="/admin/sub-category" element={<AdminPrivateRoute><Admin_Subcategories/></AdminPrivateRoute>} /> 
     */}
-   <Route path="/sidebar" element={<SidebarWithSearch/>}/>
+   <Route path="/sidebar" element={<AdminPrivateRoute><SidebarWithSearch/></AdminPrivateRoute>}/>
    <Route element={<SidebarWithSearch/>}>
    <Route path="/admin/category" element={<AdminPrivateRoute><Admin_Category/></AdminPrivateRoute>}/>
    <Route path="/admin/sub-category" element={<AdminPrivateRoute><Admin_Subcategories/></AdminPrivateRoute>}/>
    <Route path="/admin/delivery-agent/profile" element={<AdminPrivateRoute><DeliveryAgentProfile/></AdminPrivateRoute>}/>
    <Route path="/admin/view/delivery-agent/profile" element={<AdminPrivateRoute><ViewDeliveryAgent/></AdminPrivateRoute>}/>
+   <Route path="/admin/edit/delivery-agent/profile/:id" element={<AdminPrivateRoute><EditDeliveryAgent/></AdminPrivateRoute>}/>
       </Route>
 
 

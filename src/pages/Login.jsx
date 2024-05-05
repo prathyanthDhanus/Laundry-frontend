@@ -117,7 +117,7 @@ const handleCloseModal = () => {
       <div>
     
     {open && (
-      <OtpModal open={open} onClose={handleCloseModal}>
+      <OtpModal open={open} onClose={handleCloseModal} endpoint="/api/user/login/verify-otp">
         {/* Optional content to display inside the modal */}
         <h3 className="text-lg font-black text-gray-800 text-center">Verify OTP</h3>
        

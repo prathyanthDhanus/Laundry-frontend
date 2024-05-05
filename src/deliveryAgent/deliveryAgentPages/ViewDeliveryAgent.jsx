@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "../../admin/adminApi/adminApi";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-
+import swal from "sweetalert";
+import { myContext } from "../../api/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 
 const ViewDeliveryAgent = () => {
-  const [deliveryAgents, setDeliveryAgents] = useState([]);
+//   const [deliveryAgents, setDeliveryAgents] = useState([]);
+const navigate = useNavigate();
+  const {deliveryAgents,setDeliveryAgents} = useContext(myContext);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -57,7 +62,8 @@ const ViewDeliveryAgent = () => {
             await swal("Success!", response?.data?.message, "success");
         }
       } catch (error) {
-        console.log(error);
+        
+          console.log(error);
       }
   }
 
@@ -83,7 +89,7 @@ const ViewDeliveryAgent = () => {
       </button>
       <ul className="list-none mb-0">
         {deliveryAgents.map((agent,index) => (
-          <li key={agent.id} className="flex flex-wrap mb-4">
+          <li key={agent._id} className="flex flex-wrap mb-4">
                 <h5 className="p-5">{index+1}</h5>
             <div className="w-1/2 md:w-1/3 xl:w-1/4 p-4">
               <h3 className="text-lg font-bold">{agent.deliveryAgentName}</h3>
@@ -114,7 +120,7 @@ const ViewDeliveryAgent = () => {
                 />
                 
               )}
-              <MdEdit className="ml-3 cursor-pointer" fontSize="1.3rem"  color="blue" />
+              <MdEdit className="ml-3 cursor-pointer" fontSize="1.3rem"  color="blue" onClick={()=>navigate(`/admin/edit/delivery-agent/profile/${agent._id}`)}/>
               </div>
           </li>
         ))}
