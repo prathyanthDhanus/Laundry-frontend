@@ -24,6 +24,7 @@ const AdminLogin = () => {
         
         localStorage.setItem("token",response.data.data)
         await swal("Success!", response?.data?.message, "success");
+        navigate("/sidebar")
       }
     } catch (error) {
       console.log(error);

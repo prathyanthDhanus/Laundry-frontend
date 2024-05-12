@@ -28,6 +28,8 @@ import DeliveryAgentProfile from "./deliveryAgent/deliveryAgentPages/deliveryAge
 import ViewDeliveryAgent from "./deliveryAgent/deliveryAgentPages/ViewDeliveryAgent";
 import DeliveryAgentLogin from "./deliveryAgent/deliveryAgentPages/DeliveryAgentLogin";
 import EditDeliveryAgent from "./deliveryAgent/deliveryAgentPages/EditDeliveryAgent";
+import ViewAllOrders from "./admin/adminPages/ViewAllOrders";
+import AssignOrders from "./admin/adminPages/AssignOrders";
 
 
 
@@ -35,9 +37,10 @@ import EditDeliveryAgent from "./deliveryAgent/deliveryAgentPages/EditDeliveryAg
 function App() {
 
   const [deliveryAgents, setDeliveryAgents] = useState([]);
-
+  const [ordersViewAdmin,setOrdersViewAdmin] = useState([]);
   const contextValue = {
-    deliveryAgents,setDeliveryAgents
+    deliveryAgents,setDeliveryAgents,
+    ordersViewAdmin,setOrdersViewAdmin
   }
   
 
@@ -80,6 +83,8 @@ function App() {
    <Route path="/admin/delivery-agent/profile" element={<AdminPrivateRoute><DeliveryAgentProfile/></AdminPrivateRoute>}/>
    <Route path="/admin/view/delivery-agent/profile" element={<AdminPrivateRoute><ViewDeliveryAgent/></AdminPrivateRoute>}/>
    <Route path="/admin/edit/delivery-agent/profile/:id" element={<AdminPrivateRoute><EditDeliveryAgent/></AdminPrivateRoute>}/>
+   <Route path="/admin/view/orders" element={<AdminPrivateRoute><ViewAllOrders/></AdminPrivateRoute>}/>
+   <Route path="/admin/assign/orders/:id" element={<AdminPrivateRoute><AssignOrders/></AdminPrivateRoute>}/>
       </Route>
 
 

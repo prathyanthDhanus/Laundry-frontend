@@ -218,6 +218,28 @@ function SidebarWithSearch() {
                  View all delivery agents
                 </a>
               </li>
+              <li>
+                <a
+                  href="/admin/view/orders"
+                  className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-3 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 15v-1a4 4 0 00-4-4H8M18 15a4 4 0 01-4 4v1"
+                    />
+                  </svg>
+                 View all orders
+                </a>
+              </li>
             </ul>
           )}
         </li>

@@ -13,12 +13,15 @@ const GetAorder = () => {
         const data = response.data.data;
         setOrders(data);
         console.log(data);
+      
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
+
+ 
 
   return (
     <div className="p-4">
@@ -52,22 +55,23 @@ const GetAorder = () => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {orders.subcategory &&
-            orders.subcategory.map((item, index) => (
+      
+         
+           {orders.subcategory?.map((item, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {item.subCategoryName}
+                    {item.subCategoryName} 
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{item.categoryName}</div>
+                  <div className="text-sm text-gray-900">{item?.categoryName}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{item.quantity}</div>
+                  <div className="text-sm text-gray-900">{item?.quantity}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">₹{item.totalAmount}</div>
+                  <div className="text-sm text-gray-900">₹{item?.totalAmount}</div>
                 </td>
               </tr>
             ))}

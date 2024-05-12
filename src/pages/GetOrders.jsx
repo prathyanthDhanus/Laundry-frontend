@@ -60,11 +60,11 @@ const GetOrders = () => {
  
 
   return (
-    <div className="mt-5 p-8 ">
+    <div className="mt-5 p-8  ">
       <h1 className="text-2xl font-bold text-blue-400 mb-8 flex justify-center pl-12">
         Order Details
       </h1>
-      <div className="flex gap-9 justify-center m-5">
+      <div className="flex gap-9 justify-center m-5 ">
       <button
           type="submit"
            onClick={() => handleFilter('isCompleted')}
@@ -97,16 +97,15 @@ const GetOrders = () => {
       {orders?.length === 0 && (
       <div className="text-4xl leading-tight font-bold text-center text-gray-600">⚠️No orders found.</div>
     )}
+   <div className="flex flex-wrap -mx-4 flex justify-center">
 
+  
       {orders?.map((items) => (
   <div
     className="max-w-sm w-full lg:max-w-3/4  lg:flex mb-5 "
     key={items._id}
   >
-    <div
-      className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden "
-      title="Woman holding a mug"
-    ></div>
+ 
     <div className="border border-green-400 px-4 py-2 rounded-md  shadow flex flex-col cursor-pointer"onClick={()=>navigate(`/orders/order/${items._id}`)} >
       <div className="mb-8 ">
         <p className="text-sm text-gray-600 flex items-center">
@@ -143,13 +142,13 @@ const GetOrders = () => {
             <p
               className={`text-black-900 leading-none justify-start ${
                 items.isCancelled
-                  ? "text-red-500"
+                  ? "text-white bg-red-400 border p-1 "
                   : items.isPickedUp && items.isCompleted === false
-                  ? "text-blue-500"
+                  ? "text-white bg-blue-400 p-1"
                   : items.isCompleted
-                  ? "text-green-500"
+                  ? "text-white bg-green-400 p-1"
                   : items.isPickedUp===false 
-                  ? "text-orange-500"
+                  ? "text-white bg-orange-400 p-1"
                   : ""
               }`}
             >
@@ -188,6 +187,7 @@ const GetOrders = () => {
     </div>
   </div>
 ))}
+ </div>
       <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 ">
         <div className="flex flex-1 justify-between sm:hidden">
           {/* Previous and Next buttons for mobile */}

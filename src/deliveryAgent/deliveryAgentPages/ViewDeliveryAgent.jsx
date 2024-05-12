@@ -78,15 +78,18 @@ const navigate = useNavigate();
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">All Delivery Agents</h2>
+    <div className="container mx-auto p-4 mt-5">
+        <div className="flex items-center bg-red-300 justify-between px-4 py-2 rounded-full">
+
+      <h2 className="text-2xl font-bold mb-4 pt-2">All Delivery Agents</h2>
       <button
         type="submit"
         onClick={() => handleFilter("isDeleted")}
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded gap-2rem "
-      >
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded gap-2rem rounded-full "
+        >
         Deleted Delivery Agents
       </button>
+          </div>
       <ul className="list-none mb-0">
         {deliveryAgents.map((agent,index) => (
           <li key={agent._id} className="flex flex-wrap mb-4">
