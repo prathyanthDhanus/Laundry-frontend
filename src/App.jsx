@@ -31,6 +31,9 @@ import EditDeliveryAgent from "./deliveryAgent/deliveryAgentPages/EditDeliveryAg
 import ViewAllOrders from "./admin/adminPages/ViewAllOrders";
 import AssignOrders from "./admin/adminPages/AssignOrders";
 
+import PrivateRouteDeliveryBoy from "./deliveryAgent/deliveryAgentPrivateRoutes/deliveryAgentPrivateRoutes"
+import GetOrders_Deliveryagent from "./deliveryAgent/deliveryAgentPages/GetOrders_Deliveryagent";
+
 
 
 
@@ -61,6 +64,9 @@ function App() {
    <Route path="/delivery-agent/login" element={<DeliveryAgentLogin/>}/>
    {/* <Route path="/not-found" element={<NotFound/>}/> */}
    <Route path="*" element={<NotFound/>}/>
+  
+   
+   
 
    {/*================= user routes protected with token ============*/}
 
@@ -69,6 +75,7 @@ function App() {
    <Route path="/orders" element={<PrivateRoute><GetOrders/></PrivateRoute>} /> 
    <Route path="/cancel/orders/:id" element={<PrivateRoute><CancelOrder/></PrivateRoute>} /> 
    <Route path="/orders/order/:id" element={<PrivateRoute><GetAorder/></PrivateRoute>} /> 
+   
 
    {/*================== admin routes protected with token ============ */}
    
@@ -85,7 +92,16 @@ function App() {
    <Route path="/admin/edit/delivery-agent/profile/:id" element={<AdminPrivateRoute><EditDeliveryAgent/></AdminPrivateRoute>}/>
    <Route path="/admin/view/orders" element={<AdminPrivateRoute><ViewAllOrders/></AdminPrivateRoute>}/>
    <Route path="/admin/assign/orders/:id" element={<AdminPrivateRoute><AssignOrders/></AdminPrivateRoute>}/>
+   
+   
+   
+     
+     
+     
+     
+     
       </Route>
+   <Route path="/delivery/agent/orders" element={<PrivateRouteDeliveryBoy><GetOrders_Deliveryagent/></PrivateRouteDeliveryBoy>}/>
 
 
 

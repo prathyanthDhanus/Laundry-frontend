@@ -4,6 +4,7 @@ import axios from "../adminApi/adminApi";
 import { useContext } from 'react';
 import { myContext } from '../../api/ContextApi';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ViewAllOrders = () => {
   const [fromDate, setFromDate] = useState(null);
@@ -31,10 +32,30 @@ const ViewAllOrders = () => {
     setStatus(e.target.value);
   };
 
+//   useEffect(() => {
+//     // Fetch orders on initial render with default query params
+//     const defaultQueryParams = {
+//         fromDate: fromDate ? new Date(fromDate).toISOString() : new Date().toISOString(),
+//         toDate: toDate ? new Date(toDate).toISOString() : new Date().toISOString(),
+//       query: { isCancelled: false, isAssigned: false },
+//     };
+//     console.log("first", defaultQueryParams);
+    
+//     const fetchOrders = async () => {
+//         try {
+//             const response = await axios.get(`/api/admin/orders`, { params: defaultQueryParams });
+//             console.log("ooooooooooooo", response);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     };
+
+//     fetchOrders();
+// }, []);
 
   
-  const handleFilterOrders = async (e) => {
-    e.preventDefault();
+  const handleFilterOrders = async (queryParams) => {
+    // e.preventDefault();
     try {
       if (fromDate && toDate && status) {
         let query = {};
@@ -52,10 +73,10 @@ const ViewAllOrders = () => {
             toDate: toDate,     // Format date as 'YYYY-MM-DD'
             ...query,                                       // Include other query parameters
           };
-      
+     
         // console.log("queryparams",queryParams)
         const response = await axios.get(`/api/admin/orders`,{params:queryParams});
-
+          
        
      if(response.status===200){
         const data = response.data.data;
@@ -65,17 +86,22 @@ const ViewAllOrders = () => {
      }
       }
     } catch (error) {
-      console.error('Error filtering orders:', error);
+      swal("Error!", error?.response?.data?.error_message, "error");
       // Handle error state, display error message, etc.
     }
   };
+
+
+
+ 
+  
 
   return (
     <div className='p-5 w-full'>
       <div className='flex justify-center flex-col mb-5 md:mb-0 md:w-1/3'>
         <label htmlFor="status" className='mb-2 font-semibold text-gray-700'>Order Status</label>
         <select id="status" value={status} onChange={handleStatusChange} className='border p-2 rounded-md w-full'>
-          <option value="">All</option>
+          
           <option value='completed'>Completed</option>
           <option value="cancelled">Cancelled</option>
           <option value="new">New</option>
@@ -95,7 +121,7 @@ const ViewAllOrders = () => {
       <div className='flex md:w-full  justify-center '>
         <button onClick={handleFilterOrders} className='w-1/3 p-2 bg-blue-500 text-white rounded-md '>Filter Orders</button>
       </div>
-      <div className='overflow-x-auto'>
+      <div className='overflow-x-auto p-3'>
         <table className='min-w-full divide-y divide-gray-200'>
           <thead className='bg-gray-50'>
             <tr>
@@ -103,19 +129,24 @@ const ViewAllOrders = () => {
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Customer Name</th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Order Date</th>
               <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Order Status</th>
-              {/* Add more columns as needed */}
+              
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Assigned To</th>
+              
             </tr>
           </thead>
           <tbody className='bg-white divide-y divide-gray-200'>
             {ordersViewAdmin.map((order) => (
-              <tr key={order._id}>
-                <td className='px-6 py-4 whitespace-nowrap'>{order._id}</td>
-                <td className='px-6 py-4 whitespace-nowrap'>{order.userId.userName}</td>
+              <tr key={order?._id}>
+                <td className='px-6 py-4 whitespace-nowrap'>{order?._id}</td>
+                <td className='px-6 py-4 whitespace-nowrap'>{order?.userId?.userName}</td>
                 <td className='px-6 py-4 whitespace-nowrap'>{order.date.slice(0, 10)}</td>
                 <td className='px-6 py-4 whitespace-nowrap'>
                   {order.isCompleted ? 'Completed' : order.isCancelled ? 'Cancelled' : order.isAssigned ? 'Assigned' : 'New'}
                 </td>
+                <td className='px-6 py-4 whitespace-nowrap'>{order?.deliveryAgentId?.deliveryAgentName}</td>
+         
                <button className='bg-blue-600 m-3 border rounded-lg text-white' onClick={()=>navigate(`/admin/assign/orders/${order._id}`)}>View Details</button>
+   
               </tr>
             ))}
           </tbody>

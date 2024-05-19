@@ -5,7 +5,6 @@ import swal from "sweetalert";
 import axios from "axios";
 import OtpModal from "../components/OtpCheck";
 import { useState } from "react";
-import { useEffect } from "react";
 
 
 
