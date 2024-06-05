@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/Axios";
 import { useParams } from "react-router-dom";
-
+import swal from "sweetalert";
+import "../Styles/clickMeButton.css"
 const GetAorder = () => {
   const { id } = useParams(); //order id
   const [orders, setOrders] = useState([]);
+  const [paymentLink, setPaymentLink] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +23,21 @@ const GetAorder = () => {
     fetchData();
   }, []);
 
+
+  const handlePayment = async()=>{
+
+    const data = {
+      orderId: orders._id,
+    }
+  
+    try{
+      const response = await axios.post(`/api/user/payment`,data);
+      setPaymentLink(response.data.data);
+
+    }catch(error){
+      swal("Error!", error?.response?.data?.error_message, "error");
+    }
+  }
  
 
   return (
@@ -77,6 +94,27 @@ const GetAorder = () => {
             ))}
         </tbody>
       </table>
+     
+      <div className="grid justify-center  ">
+      <button className="text-white hover:text-[rgb(255,215,0)] bg-green-400 w-60 h-8" onClick={handlePayment}>Pay Now</button>
+
+</div>
+{paymentLink && (
+        <div className="grid justify-center mt-4">
+          <a
+            href={paymentLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-white hover:text-[rgb(255,215,0)] bg-red-700 w-60 h-8 flex items-center justify-center ${paymentLink ? 'blink' : ''}`}
+          >
+            Click Me
+          </a>
+        </div>
+      )}
+<div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-4 text-sm mt-4" role="alert">
+  <strong className="font-bold">Note:</strong>
+  <span className="block sm:inline">  You can pay the amount once the order request is out for delivery</span>
+</div>
     </div>
   );
 };

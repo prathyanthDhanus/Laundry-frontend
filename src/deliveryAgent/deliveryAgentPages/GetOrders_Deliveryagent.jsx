@@ -133,7 +133,9 @@ const GetOrders_Deliveryagent = () => {
                 ? "Picked Up"
                 : "Pending"}
             </p>
+            <button className="px-4 py-2 bg-green-300 text-white rounded mt-2 hover:bg-green-500"  >Completed</button>
             <div className="flex justify-end ">
+             
               <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center  ">
                 <input
                   type="checkbox"

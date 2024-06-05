@@ -4,10 +4,12 @@ import swal from "sweetalert";
 // import axios from "../api/Axios"; // Import axios for HTTP requests
 import { useRef } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function OtpModal({ open, onClose, children ,endpoint}) {
 
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(""); // State to store the OTP digits
   const [showImage, setShowImage] = useState(false);
   const userId = localStorage.getItem("userId") || localStorage.getItem("deliveryAgentId") ;
@@ -76,6 +78,8 @@ export default function OtpModal({ open, onClose, children ,endpoint}) {
        localStorage.removeItem("userId") || localStorage.removeItem("deliveryAgentId");
        localStorage.setItem("token",response.data.data)
       await swal("Success!", response.data.message, "success");
+      navigate('/')
+
       
       }
     } catch (error) {

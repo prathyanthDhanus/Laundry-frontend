@@ -4,7 +4,8 @@ import jwtDecode from "jwt-decode";
 
 
 const Axios = axios.create({
-  baseURL: "http://localhost:3000",
+  // baseURL: "http://localhost:3000",
+  baseURL: "laundry-backend-theta.vercel.app",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

@@ -39,13 +39,13 @@ const handleCloseModal = () => {
    
       await swal("Success!", response?.data?.message, "success");
       localStorage.setItem("userId",response.data.data)
-      setOpen(true);
-      // navigate("/home");  
+        setOpen(true);
+      // navigate("/");  
     }
   } catch (error) {
    
-    console.log(error)
-    swal("Error!", "Something went wrong", "error");
+    // console.log(error)
+    swal("Error!", error?.response?.data?.error_message, "error");
   }
 };
 

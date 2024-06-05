@@ -33,6 +33,7 @@ import AssignOrders from "./admin/adminPages/AssignOrders";
 
 import PrivateRouteDeliveryBoy from "./deliveryAgent/deliveryAgentPrivateRoutes/deliveryAgentPrivateRoutes"
 import GetOrders_Deliveryagent from "./deliveryAgent/deliveryAgentPages/GetOrders_Deliveryagent";
+import Profile from "./pages/Profile";
 
 
 
@@ -75,6 +76,7 @@ function App() {
    <Route path="/orders" element={<PrivateRoute><GetOrders/></PrivateRoute>} /> 
    <Route path="/cancel/orders/:id" element={<PrivateRoute><CancelOrder/></PrivateRoute>} /> 
    <Route path="/orders/order/:id" element={<PrivateRoute><GetAorder/></PrivateRoute>} /> 
+   <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} /> 
    
 
    {/*================== admin routes protected with token ============ */}
