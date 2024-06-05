@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 
 const Axios = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://laundry-backend-8zln.onrender.com",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -22,10 +22,10 @@ Axios.interceptors.request.use((request) => {
   // console.log("decodedtoken",decodedToken);
   const isExpired = dayjs.unix(decodedToken?.exp).diff(dayjs()) < 1;
 
-  if (isExpired && request?.url !== `http://localhost:3000/api/auth/refresh-token/user`) {
+  if (isExpired && request?.url !== `https://laundry-backend-8zln.onrender.com/api/auth/refresh-token/user`) {
     const accessToken = async () => {
       try {
-        const response = await Axios.post(`http://localhost:3000/api/auth/refresh-token/user`);
+        const response = await Axios.post(`https://laundry-backend-8zln.onrender.com/api/auth/refresh-token/user`);
         // console.log("refreshresponse",response)
         localStorage.setItem("token", response?.data?.data);
         window.location.href = path;

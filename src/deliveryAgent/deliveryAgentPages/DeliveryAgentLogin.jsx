@@ -24,7 +24,7 @@ const DeliveryAgentLogin = () => {
     }
     console.log(deliveryAgentData)
    try{
-     const response = await axios.post("http://localhost:3000/api/delivery-agent/login",deliveryAgentData);
+     const response = await axios.post("https://laundry-backend-8zln.onrender.com/api/delivery-agent/login",deliveryAgentData);
      if(response.status===200){
         await swal("Success!", response?.data?.message, "success");
         localStorage.setItem("deliveryAgentId",response?.data?.data);

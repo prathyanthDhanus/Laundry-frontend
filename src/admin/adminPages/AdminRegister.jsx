@@ -19,7 +19,7 @@ const AdminRegister = () => {
       adminKeyId:e.target.adminKeyId.value
     };
     try {
-      const response = await axios.post("http://localhost:3000/api/admin/register", adminData);
+      const response = await axios.post("https://laundry-backend-8zln.onrender.com/api/admin/register", adminData);
       console.log(response);
       if (response.status === 200) {
         await swal("Success!", response?.data?.message, "success");

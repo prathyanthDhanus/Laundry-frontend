@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 
 const Axios = axios.create({
   // baseURL: "http://localhost:3000",
-  baseURL: "laundry-backend-theta.vercel.app",
+  baseURL: "https://laundry-backend-8zln.onrender.com",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -23,10 +23,10 @@ Axios.interceptors.request.use((request) => {
   // console.log("decodedtoken",decodedToken);
   const isExpired = dayjs.unix(decodedToken?.exp).diff(dayjs()) < 1;
 
-  if (isExpired && request?.url !== `http://localhost:3000/api/auth/refresh-token/admin`) {
+  if (isExpired && request?.url !== `https://laundry-backend-8zln.onrender.com/api/auth/refresh-token/admin`) {
     const accessToken = async () => {
       try {
-        const response = await Axios.post(`http://localhost:3000/api/auth/refresh-token/admin`);
+        const response = await Axios.post(`https://laundry-backend-8zln.onrender.com/api/auth/refresh-token/admin`);
         // console.log("refreshresponse",response)
         localStorage.setItem("token", response?.data?.data);
         window.location.href = path;

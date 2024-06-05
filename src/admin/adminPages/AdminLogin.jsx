@@ -18,7 +18,7 @@ const AdminLogin = () => {
     
     };
     try {
-      const response = await axios.post("http://localhost:3000/api/admin/login", adminData);
+      const response = await axios.post("https://laundry-backend-8zln.onrender.com/api/admin/login", adminData);
       
       if (response.status === 200) {
         

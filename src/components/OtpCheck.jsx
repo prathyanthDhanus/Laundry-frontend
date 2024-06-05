@@ -49,7 +49,7 @@ export default function OtpModal({ open, onClose, children ,endpoint}) {
     }
    try{
     // const response = await axios.post("/api/user/verify-otp",otp);
-    const response = await axios.post(`http://localhost:3000${endpoint}`,otpData)
+    const response = await axios.post(`https://laundry-backend-8zln.onrender.com${endpoint}`,otpData)
      if(response.status===200){
       localStorage.setItem("token",response.data.data)
       await swal("Success!", response.data.message, "success");
@@ -73,7 +73,7 @@ export default function OtpModal({ open, onClose, children ,endpoint}) {
     try {
        
       // const response = await axios.post("http://localhost:3000/api/user/login/verify-otp", data);
-      const response = await axios.post(`http://localhost:3000${endpoint}`, data);
+      const response = await axios.post(`https://laundry-backend-8zln.onrender.com${endpoint}`, data);
       if(response.status===200){
        localStorage.removeItem("userId") || localStorage.removeItem("deliveryAgentId");
        localStorage.setItem("token",response.data.data)

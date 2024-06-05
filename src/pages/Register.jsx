@@ -22,7 +22,7 @@ const Register = () => {
   };
  
   try {
-    const response = await axios.post("http://localhost:3000/api/user/register", userData);
+    const response = await axios.post("https://laundry-backend-8zln.onrender.com/api/user/register", userData);
     
     if (response?.status === 200) {
       // localStorage.setItem('token', response.data.token);
