@@ -1,20 +1,25 @@
 import React from "react";
+import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import swal from "sweetalert";
 // import axios from "../api/Axios";
 import axios from "axios";
+import Loader from "../components/Loader";
+import "../Styles/loader.css";
 
 
 
 const Register = () => {
 
  const navigate = useNavigate();
-
+ const [loading, setLoading] = useState(false); 
 
  //-------------- login function -----------------
 
  const handleRegister = async (e) => {
   e.preventDefault();
+  setLoading(true)
+
   const userData = {
     userName : e.target.username.value.toUpperCase(),
     email: e.target.email.value,
@@ -28,10 +33,12 @@ const Register = () => {
       // localStorage.setItem('token', response.data.token);
       await swal("Success!", response?.data?.message, "success");
       navigate("/login");  
+      setLoading(false)
     }
   } catch (error) {
     
     swal("Error!", error?.response?.data?.message, "error");
+    setLoading(false)
   }
 };
 
@@ -41,7 +48,7 @@ const Register = () => {
   
    <>
   
-      <div className="flex items-center justify-center min-h-screen bg-grey-100  ">
+      <div className={`flex items-center justify-center min-h-screen bg-gray-100 ${loading ? "blur" : ""}`}>
       <div
         className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0"
       >
@@ -108,7 +115,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  
+    {loading && <Loader />}
    </>
     
     

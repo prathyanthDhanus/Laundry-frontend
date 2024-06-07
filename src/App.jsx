@@ -34,6 +34,9 @@ import AssignOrders from "./admin/adminPages/AssignOrders";
 import PrivateRouteDeliveryBoy from "./deliveryAgent/deliveryAgentPrivateRoutes/deliveryAgentPrivateRoutes"
 import GetOrders_Deliveryagent from "./deliveryAgent/deliveryAgentPages/GetOrders_Deliveryagent";
 import Profile from "./pages/Profile";
+import About from "./pages/Aboutus";
+import ContactUs from "./pages/Contact";
+import Loader from "./components/Loader";
 
 
 
@@ -61,10 +64,13 @@ function App() {
    <Route path="/register" element={<Register/>}/>
    <Route path="/admin/login" element={<AdminLogin/>}/>
    <Route path="/admin/register" element={<AdminRegister/>}/>
+   <Route path="/aboutus" element={<About/>}/>
+   <Route path="/contactus" element={<ContactUs/>}/>
    <Route path="/unauthorized" element={<Unauthorized/>}/>
    <Route path="/delivery-agent/login" element={<DeliveryAgentLogin/>}/>
    {/* <Route path="/not-found" element={<NotFound/>}/> */}
    <Route path="*" element={<NotFound/>}/>
+   <Route path="loader" element={<Loader/>}/>
   
    
    

@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "About Us", href: "#", current: false },
-  { name: "Services", href: "#", current: false },
-  { name: 'Contact Us', href: '#', current: false },
-  { name: 'Order Booking', href: '/place-orders', current: false },
+  { name: "About Us", href: "/aboutus", current: false },
+  { name: "Contact Us", href: "/contactus", current: false },
+  { name: "Order Booking", href: "/place-orders", current: false },
+  { name: "Login/Signup", href: "/login", logged: true },
 ];
 
 function classNames(...classes) {
@@ -53,58 +53,54 @@ const Navbar = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ">
+                <div className="flex flex-shrink-0 items-center ">
                   <img
                     className="h-8 w-auto"
-                    src="https://w7.pngwing.com/pngs/621/196/png-transparent-e-commerce-logo-logo-e-commerce-electronic-business-ecommerce-angle-text-service.png"
+                    src="https://t3.ftcdn.net/jpg/04/27/57/28/360_F_427572855_RhQYKzH4mAzkzIYhnGngBA4h4x5kUwnm.jpg"
                     alt="E-Commerce"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-  {navigation.map((item) => (
-    <a
-      key={item.name}
-      href={item.href}
-      className={classNames(
-        item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-        "rounded-md px-3 py-2 text-sm font-medium",
-        // Add media query for smaller screens
-        "sm:px-2"
-      )}
-      aria-current={item.current ? "page" : undefined}
-    >
-      {item.name}
-    </a>
-  ))}
-</div>
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                           
+                          item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          item.logged ? "bg-green-400 text-white" : "",
+                          "rounded-md px-3 py-2 text-sm font-medium",
+                          // Add media query for smaller screens
+                          "sm:px-2"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button className="hover:text-white text-green-500 rounded-md px-3 py-2 text-sm font-medium border-2 border-green-500" onClick={()=>navigate("/login")}>
+              {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:p-5 sm:pr-5">
+                <button
+                  className="hover:text-white text-green-500 rounded-md px-3 py-2 text-sm font-medium border-2 border-green-500 sm:mr-4"
+                  onClick={() => navigate("/login")}
+                >
                   Login/Signup
                 </button>
-              </div>
+              </div> */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=338&ext=jpg&ga=GA1.1.1518270500.1717632000&semt=ais_user"
                         alt=""
                       />
                     </Menu.Button>
@@ -122,7 +118,7 @@ const Navbar = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="/edit-user"
+                            href="/profile"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"

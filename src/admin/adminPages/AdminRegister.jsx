@@ -117,6 +117,7 @@ const AdminRegister = () => {
             </button>
           </div>
         </form>
+        <p><span className="font-bold">Note :</span> Admin Key ID is a unique ID for admin registration. It is used to prevent unauthorized access or registration</p>
       </div>
     </div>
   );

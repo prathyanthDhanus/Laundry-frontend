@@ -11,7 +11,7 @@ const Profile = () => {
       primaryAddress: inputRef.current.primaryAddress.value,
       primaryAddressLandMark: inputRef.current.primaryAddressLandMark.value,
       primaryPhoneNumber: inputRef.current.primaryPhoneNumber.value,
-      secondaryAddressLandMark: inputRef.current.secondaryAddressLandMark.value,
+      secondaryAddress: inputRef.current.secondaryAddress.value,
       secondaryAddressLandMark: inputRef.current.secondaryAddressLandMark.value,
       secondaryPhoneNumber: inputRef.current.secondaryPhoneNumber.value,
     };

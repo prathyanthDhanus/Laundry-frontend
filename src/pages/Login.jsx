@@ -5,7 +5,8 @@ import swal from "sweetalert";
 import axios from "axios";
 import OtpModal from "../components/OtpCheck";
 import { useState } from "react";
-
+import Loader from "../components/Loader";
+import "../Styles/loader.css";
 
 
 
@@ -13,7 +14,7 @@ const Login = () => {
 
  const navigate = useNavigate()
  const [open, setOpen] = useState(false); // State to control modal visibility
-
+ const [loading, setLoading] = useState(false); 
 
 
 const handleCloseModal = () => {
@@ -27,6 +28,8 @@ const handleCloseModal = () => {
 
  const handleLogin = async (e) => {
   e.preventDefault();
+  setLoading(true);
+  
   const userData = {
     email: e.target.email.value,
     password: e.target.password.value,
@@ -34,17 +37,18 @@ const handleCloseModal = () => {
   
   try {
     const response = await axios.post("https://laundry-backend-8zln.onrender.com/api/user/login", userData);
+    setLoading(false); 
 
     if (response.status === 200) {
    
       await swal("Success!", response?.data?.message, "success");
       localStorage.setItem("userId",response.data.data)
         setOpen(true);
-      // navigate("/");  
+     
     }
   } catch (error) {
    
-    // console.log(error)
+     setLoading(false);
     swal("Error!", error?.response?.data?.error_message, "error");
   }
 };
@@ -54,7 +58,9 @@ const handleCloseModal = () => {
   return (
   
    <>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+ 
+      {/* <div className="flex items-center justify-center min-h-screen bg-gray-100"> */}
+      <div className={`flex items-center justify-center min-h-screen bg-gray-100 ${loading ? "blur" : ""}`}>
       <div
         className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0"
       >
@@ -102,6 +108,7 @@ const handleCloseModal = () => {
             Dont'have an account?
             <span className="font-bold text-black cursor-pointer" onClick={()=>navigate("/register")}>Sign up for free</span>
           </div>
+          <span className="text-gray-500 hover: cursor-pointer" onClick={()=>navigate('/admin/login')}>Admin Login</span>
         </div>
         {/* right side */} 
         <div className="relative">
@@ -113,6 +120,7 @@ const handleCloseModal = () => {
          
         </div>
       </div>
+      
       <div>
     
     {open && (
@@ -122,8 +130,10 @@ const handleCloseModal = () => {
        
       </OtpModal>
     )}
+    
   </div>
     </div>
+    {loading && <Loader />}
    </>
     
     
