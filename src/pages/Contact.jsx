@@ -33,7 +33,7 @@ const ContactUs = () => {
   </div>
   <div className="flex flex-col">
     <h4 className='text-lg font-bold '>E-Mail</h4>
-    <p className="text-lg text-indigo-600">📧info@example.com</p>
+    <p className="text-lg text-indigo-600">📧laundry@gmail.com</p>
   </div>
 </div>
     </div>

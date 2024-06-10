@@ -3,6 +3,9 @@
     import swal from "sweetalert";
     import { GrLinkNext } from "react-icons/gr";
     import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+   
 
     const Order = () => {
 
@@ -105,12 +108,7 @@
         }
       }, [subCategories]);
 
-      // useEffect(() => {
-      //   const updatedTotals = quantities.map((quantity, index) => {
-      //     return quantity * subCategories[index].serviceCharge;
-      //   });
-      //   setTotals(updatedTotals);
-      // }, [quantities]);
+    
       useEffect(() => {
         const updatedTotals = quantities.map((quantity, index) => {
           // Check if subCategories[index] exists before accessing its properties
@@ -125,6 +123,10 @@
 
       return (
         <>
+        <Navbar/>
+        <div className="bg-cover">
+          
+
           <div className="container mx-auto p-4 grid justify-center items-center">
             <h1 className="text-2xl font-bold text-blue-400 ">Book Your Order</h1>
             <div className="py-8">
@@ -139,7 +141,7 @@
                         name="category"
                         value={item._id}
                         onChange={() => handleCategorySelect(item._id)}
-                      />
+                        />
                       <span className="ml-2">{item.categoryName}</span>
                     </label>
                   </li>
@@ -193,9 +195,15 @@
               </div>
             </div>
           )}
+              </div>
+              <div className="pt-10">
+
+              <Footer/>
+              </div>
         </>
       );
     };
 
     export default Order;
-    ``
+    
+    

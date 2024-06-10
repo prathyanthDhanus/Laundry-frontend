@@ -19,15 +19,25 @@ const Navbar = () => {
   const navigate = useNavigate();
   //--------------- user logout -------------------
   const handleSignOut = async () => {
-    console.log("even product");
+   
     try {
-      localStorage.removeItem("token");
-      await swal(
-        "Success!",
-        "You have been signed out successfully.",
-        "success"
-      );
-      navigate("/");
+      const token = localStorage.getItem('token');
+      if(token){
+        localStorage.removeItem("token");
+        await swal(
+          "Success!",
+          "You have been signed out successfully.",
+          "success"
+        );
+        navigate("/");
+      }else{
+        await swal(
+          "Error!",
+          "You are not signed in.",
+          "error"
+        );
+      }
+   
     } catch (error) {
       console.error("Error during sign out:", error);
       swal("Error!", "Something went wrong during sign out.", "error");

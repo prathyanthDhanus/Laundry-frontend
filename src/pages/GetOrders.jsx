@@ -4,6 +4,8 @@ import Pagination from "../components/Pagination";
 import axios from "../api/Axios"; 
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 
 const GetOrders = () => {
@@ -16,22 +18,13 @@ const GetOrders = () => {
     // Function to fetch orders from backend
     const fetchOrders = async () => {
       try {
-        // const response = await axios.get(
-        //   `/api/user/orders?page=${currentPage}`
-        // );
-
-        // // Check the structure of the response data
-        // const { data, totalPages } = response.data;
-
-        // setOrders(data); // Set orders data
-        // setTotalPages(totalPages); // Update totalPages state
 
         const response = await axios.get('/api/user/user-orders');
         const data = response.data.data;
         setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
-        // navigate('*')
+       
       }
     };
 
@@ -60,6 +53,9 @@ const GetOrders = () => {
  
 
   return (
+    <>
+    <Navbar/>
+  
     <div className="mt-5 p-8  ">
       <h1 className="text-2xl font-bold text-blue-400 mb-8 flex justify-center pl-12">
         Order Details
@@ -202,6 +198,11 @@ const GetOrders = () => {
         </div>
       </div>
     </div>
+    <div className="pt-5 position-fixed">
+
+    <Footer/>
+    </div>
+    </>
   );
 };
 

@@ -10,6 +10,23 @@ function SidebarWithSearch() {
     setOpen(open === value? 0 : value);
   };
 
+
+  const handleSignOut = async () => {
+   
+    try {
+      localStorage.removeItem("token");
+      await swal(
+        "Success!",
+        "You have been signed out successfully.",
+        "success"
+      );
+      navigate("/");
+    } catch (error) {
+      console.error("Error during sign out:", error);
+      swal("Error!", "Something went wrong during sign out.", "error");
+    }
+  };
+
   return (
     <div className='flex '>
     <div className="h-[calc(104vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 ">
@@ -218,7 +235,13 @@ function SidebarWithSearch() {
                  View all delivery agents
                 </a>
               </li>
-              <li>
+             
+            </ul>
+          )}
+        </li>
+        
+  
+        <li>
                 <a
                   href="/admin/view/orders"
                   className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
@@ -240,69 +263,8 @@ function SidebarWithSearch() {
                  View all orders
                 </a>
               </li>
-            </ul>
-          )}
-        </li>
         <li className="p-0">
-          <button className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            Inbox
-            <span className="ml-auto text-xs text-gray-500">14</span>
-          </button>
-        </li>
-        <li className="p-0">
-          <button className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 000-7z"
-              />
-            </svg>
-            Profile
-          </button>
-        </li>
-        <li className="p-0">
-          <button className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            Settings
-          </button>
-        </li>
-        <li className="p-0">
-          <button className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100">
+          <button className="flex items-center w-full p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100" onClick={handleSignOut}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"

@@ -3,6 +3,8 @@ import axios from "../api/Axios";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 import "../Styles/clickMeButton.css"
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const GetAorder = () => {
   const { id } = useParams(); //order id
   const [orders, setOrders] = useState([]);
@@ -41,6 +43,9 @@ const GetAorder = () => {
  
 
   return (
+    <>
+   
+    <Navbar/>
     <div className="p-4">
       <table className="w-full min-w-max table-auto divide-y divide-gray-200">
         <thead className="bg-gray-50">
@@ -116,6 +121,8 @@ const GetAorder = () => {
   <span className="block sm:inline">  You can pay the amount once the order request is out for delivery</span>
 </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
