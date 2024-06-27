@@ -10,7 +10,7 @@ The Laundry Application is a web-based platform designed to simplify the process
   - [Installation](#installation)
 - [Folder Structure](#folder-structure)
 - [Technologies Used](#technologies-used)
-- [Screenshots](#screenshots)
+
 
 ## Features
 
@@ -50,8 +50,6 @@ Run the client:
 ```bash
  npm run dev
 ```
-
-The client will be running at http://localhost:3000.
 
 ## Folder Structure
 - `/src`: React client application
