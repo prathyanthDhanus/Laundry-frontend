@@ -73,23 +73,22 @@ const Navbar = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                           
-                          item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          item.logged ? "bg-green-400 text-white" : "",
-                          "rounded-md px-3 py-2 text-sm font-medium",
-                          // Add media query for smaller screens
-                          "sm:px-2"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                  {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="button"
+                  onClick={() => navigate(item.href)}
+                  className={classNames(
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
+                  )}
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
                   </div>
                 </div>
               </div>
